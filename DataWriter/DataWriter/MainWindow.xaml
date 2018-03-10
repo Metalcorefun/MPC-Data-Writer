@@ -1,0 +1,81 @@
+﻿<Window x:Class="DataWriter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataWriter"
+        mc:Ignorable="d"
+        Title="MPC Data Writer" Height="708.737" Width="653.947">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Grid Background="WhiteSmoke">
+        <GroupBox Header="Путь" Margin="10,558,10,0" Height="62" VerticalAlignment="Top">
+            <TextBox Name="tbPath" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="565" Text="{Binding FolderPath}"/>
+        </GroupBox>
+        <Button Content="..." HorizontalAlignment="Left" Margin="598,584,0,0" VerticalAlignment="Top" Width="23" Height="23" Click="ShowDirectory" />
+        <TabControl Margin="10,10,10,0" Height="423" VerticalAlignment="Top">
+            <TabItem Header="Камера 1">
+                <Grid Background="#FFE5E5E5">
+                    <Border Grid.Row="1"
+                    BorderBrush="Black"
+                    BorderThickness="1" Margin="0,0,0,50
+                    ">
+                        <Image Source="{Binding Image}" Margin="0,0,0,50" />
+                    </Border>
+                    <Label
+                         Margin="0,22,5,12"
+                         VerticalAlignment="Bottom"
+                         Content="Ip camera" Grid.RowSpan="2" />
+                    <TextBox
+                     VerticalAlignment="Bottom"
+                     Text="{Binding IpCameraUrl}" Margin="63,0,10,16" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="Камера 2">
+                <Grid Background="#FFE5E5E5">
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <StackPanel
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal" Margin="0,623,103,0" RenderTransformOrigin="1.568,-1.075" Height="40" VerticalAlignment="Top">
+            <Button Grid.Column="0"
+                        Width="100"
+                        Height="30"
+                        Margin="5"
+                        HorizontalAlignment="Right"
+                        Command="{Binding StartSourceCommand}"
+                        Content="Start video" />
+            <Button Grid.Column="1"
+                        Width="100"
+                        Height="30"
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding StopSourceCommand}"
+                        Content="Stop video" />
+            <Button Grid.Column="1"
+                    Width="100"
+                    Height="30"
+                    Margin="5"
+                    HorizontalAlignment="Right"
+                    Command="{Binding StartRecordingCommand}"
+                    Content="Start rec" Click="StartRecording" />
+            <Button Grid.Column="2"
+                    Width="100"
+                    Margin="5"
+                    HorizontalAlignment="Left"
+                    Command="{Binding StopRecordingCommand}"
+                    Content="Stop rec" Click="StopRecording" />
+        </StackPanel>
+        <ListView Name="sourceList"  Margin="10,438,10,0" Height="91" VerticalAlignment="Top">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="500"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Обновить список аудиоустройств" HorizontalAlignment="Center" Margin="0,539,0,0" VerticalAlignment="Top" Width="258" Click="RefreshAudioDevices"/>
+    </Grid>
+</Window>

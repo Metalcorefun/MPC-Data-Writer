@@ -1,0 +1,110 @@
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\avcodec-53.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\avdevice-53.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\avformat-53.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\avutil-51.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\postproc-52.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\swresample-0.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\swscale-2.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Accord.dll.config
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\DataWriter.exe.config
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\DataWriter.exe
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\DataWriter.pdb
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Accord.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Accord.Video.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Accord.Video.FFMPEG.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\AForge.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\AForge.Video.DirectShow.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\AForge.Video.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Extras.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Platform.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\KBCsv.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\NAudio.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\System.Windows.Interactivity.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Accord.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Accord.Video.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Accord.Video.FFMPEG.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\AForge.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\AForge.Video.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\AForge.Video.DirectShow.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.pdb
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Extras.pdb
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Extras.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Platform.pdb
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Platform.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\KBCsv.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\Microsoft.Practices.ServiceLocation.xml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter.csprojResolveAssemblyReference.cache
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\MainWindow.g.cs
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\App.g.cs
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter_Content.g.cs
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter_MarkupCompile.cache
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter_MarkupCompile.lref
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\MainWindow.baml
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter.g.resources
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter.Properties.Resources.resources
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter.csproj.GenerateResource.Cache
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter.csproj.CoreCompileInputs.cache
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter.exe
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\obj\Release\DataWriter.pdb
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\DianaDevLib.dll
+C:\Users\Антон\documents\visual studio 2017\Projects\DataWriter\DataWriter\bin\Release\sense4.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\avcodec-53.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\avdevice-53.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\avformat-53.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\avutil-51.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\postproc-52.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\swresample-0.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\swscale-2.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\DianaDevLib.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\sense4.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Accord.dll.config
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\DataWriter.exe.config
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\DataWriter.exe
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\DataWriter.pdb
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Accord.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Accord.Video.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Accord.Video.FFMPEG.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\AForge.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\AForge.Video.DirectShow.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\AForge.Video.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Extras.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Platform.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\KBCsv.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Microsoft.Practices.ServiceLocation.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\NAudio.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\System.Windows.Interactivity.dll
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Accord.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Accord.Video.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Accord.Video.FFMPEG.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\AForge.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\AForge.Video.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\AForge.Video.DirectShow.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.pdb
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Extras.pdb
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Extras.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Platform.pdb
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\GalaSoft.MvvmLight.Platform.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\KBCsv.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Microsoft.Practices.ServiceLocation.pdb
+D:\Programming\Projects\MPC\DataWriter\DataWriter\bin\Release\Microsoft.Practices.ServiceLocation.xml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter.csprojResolveAssemblyReference.cache
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\MainWindow.g.cs
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\App.g.cs
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter_Content.g.cs
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\GeneratedInternalTypeHelper.g.cs
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter_MarkupCompile.cache
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter_MarkupCompile.lref
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\MainWindow.baml
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter.g.resources
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter.Properties.Resources.resources
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter.csproj.GenerateResource.Cache
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter.csproj.CoreCompileInputs.cache
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter.exe
+D:\Programming\Projects\MPC\DataWriter\DataWriter\obj\Release\DataWriter.pdb
