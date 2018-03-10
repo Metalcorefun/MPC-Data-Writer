@@ -157,7 +157,7 @@ namespace DataWriter
             string timestamp = DateTime.Now.ToString();
             timestamp = timestamp.Replace(':', '.');
 
-            dialog.FileName = FolderPath + "\\" + timestamp;
+            dialog.FileName = FolderPath + "\\" + timestamp + ".avi";
             dialog.DefaultExt = ".avi";
             dialog.AddExtension = true;
             //var dialogresult = dialog.ShowDialog();
