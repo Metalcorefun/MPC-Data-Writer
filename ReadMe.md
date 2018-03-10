@@ -27,15 +27,15 @@
 
 Используемые библиотеки
 ----------------------------------------------------------
-Accord 3.4.0
-Accord.Video 3.4.0
-Accord.Video.FFMPEG 3.4.0
-AForge 2.2.5
-AForge.Video 2.2.5
-AForge.Video.DirectShow 2.2.5                                       
-CommonServiceLocator 1.3
-DianaDevLib
-SenseLock
-KBCsv 5.0.0
-MvvmLightLibs 5.3.0.0
-NAudio
+Accord 3.4.0 <br />
+Accord.Video 3.4.0 <br />
+Accord.Video.FFMPEG 3.4.0 <br />
+AForge 2.2.5 <br />
+AForge.Video 2.2.5 <br />
+AForge.Video.DirectShow 2.2.5 <br />                                    
+CommonServiceLocator 1.3 <br />
+DianaDevLib <br />
+SenseLock <br />
+KBCsv 5.0.0 <br />
+MvvmLightLibs 5.3.0.0 <br />
+NAudio <br />
