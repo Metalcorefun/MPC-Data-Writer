@@ -18,69 +18,37 @@ namespace DataWriter
 {
     internal class MainWindowViewModel : ObservableObject, IDisposable
     {
-        #region Private fields
-
-        private FilterInfo _currentDevice;
-
+        #region //Private Fields//
         private BitmapImage _image;
+        private BitmapImage _image2;
+
         private string _ipCameraUrl;
+        private string _ipCameraUrl2;
+
         private string _folderPath;
-
-        private bool _isIpCameraSource;
-
+        
         private IVideoSource _videoSource;
-        private VideoFileWriter _writer;
-        private bool _recording;
-        private DateTime? _firstFrameTime;
+        private IVideoSource _videoSource2;
 
+        private VideoFileWriter _writer;
+        private VideoFileWriter _writer2;
+
+        private bool _recording;
+
+        private DateTime? _firstFrameTime;
+        private DateTime? _firstFrameTime2;
         #endregion
 
-        #region Constructor
 
         public MainWindowViewModel()
         {
-            StartSourceCommand = new RelayCommand(StartCamera);
-            StopSourceCommand = new RelayCommand(StopCamera);
-            StartRecordingCommand = new RelayCommand(StartRecording);
-            StopRecordingCommand = new RelayCommand(StopRecording);
-            IpCameraUrl = "http://88.53.197.250/axis-cgi/mjpg/video.cgi?resolution=320×240";
-            FolderPath = "D:\\TestDir";
-        }
-
-        #endregion
-
-        #region Properties
-
-        public ObservableCollection<FilterInfo> VideoDevices { get; set; }
-
-        public BitmapImage Image
-        {
-            get { return _image; }
-            set { Set(ref _image, value); }
-        }
-
-        public bool IsIpCameraSource
-        {
-            get { return _isIpCameraSource; }
-            set { Set(ref _isIpCameraSource, value); }
-        }
-
-        public string IpCameraUrl
-        {
-            get { return _ipCameraUrl; }
-            set { Set(ref _ipCameraUrl, value); }
-        }
-
-        public string FolderPath
-        {
-            get { return _folderPath; }
-            set { Set(ref _folderPath, value); }
-        }
-
-        public FilterInfo CurrentDevice
-        {
-            get { return _currentDevice; }
-            set { Set(ref _currentDevice, value); }
+            StartSourceCommand = new RelayCommand(StartVideoSource);
+            StopSourceCommand = new RelayCommand(StopVideoSource);
+            StartRecordingCommand = new RelayCommand(StartVideoRecording);
+            StopRecordingCommand = new RelayCommand(StopVideoRecording);
+            IpCameraUrl = "http://88.53.197.250/axis-cgi/mjpg/video.cgi";
+            IpCameraUrl2 = "http://212.162.177.75/axis-cgi/mjpg/video.cgi";
+            FolderPath = "C:\\Users\\pingv\\Desktop\\Test";
         }
 
         public ICommand StartRecordingCommand { get; private set; }
@@ -91,8 +59,37 @@ namespace DataWriter
 
         public ICommand StopSourceCommand { get; private set; }
 
-        #endregion
+        public string FolderPath
+        {
+            get { return _folderPath; }
+            set { Set(ref _folderPath, value); }
+        }
 
+        public void Dispose()
+        {
+            if ((_videoSource != null && _videoSource.IsRunning) || (_videoSource2 != null && _videoSource2.IsRunning))
+            {
+                _videoSource.Stop();
+                _videoSource2.Stop();
+            }
+            _writer?.Dispose();
+            _writer2?.Dispose();
+        }
+
+        #region //Camera 1//
+
+        public BitmapImage Image
+        {
+            get { return _image; }
+            set { Set(ref _image, value); }
+        }
+
+        public string IpCameraUrl
+        {
+            get { return _ipCameraUrl; }
+            set { Set(ref _ipCameraUrl, value); }
+        }
+        
         private void StartCamera()
         {
             _videoSource = new MJPEGStream(IpCameraUrl);
@@ -146,38 +143,127 @@ namespace DataWriter
 
         private void StopRecording()
         {
-            _recording = false;
             _writer.Close();
             _writer.Dispose();
         }
 
         private void StartRecording()
         {
-            var dialog = new SaveFileDialog();
             string timestamp = DateTime.Now.ToString();
-            timestamp = timestamp.Replace(':', '.');
+            timestamp = timestamp.Replace(':', '_');
 
-            dialog.FileName = FolderPath + "\\" + timestamp + ".avi";
-            dialog.DefaultExt = ".avi";
-            dialog.AddExtension = true;
-            //var dialogresult = dialog.ShowDialog();
-            //if (dialogresult != true)
-            //{
-            //    return;
-            //}
+            string FileName = FolderPath + "\\1_" + timestamp + ".avi";
             _firstFrameTime = null;
             _writer = new VideoFileWriter();
-            _writer.Open(dialog.FileName, (int)Math.Round(Image.Width, 0), (int)Math.Round(Image.Height, 0));
-            _recording = true;
+            _writer.Open(FileName, (int)Math.Round(Image.Width, 0), (int)Math.Round(Image.Height, 0));
+        }
+        #endregion
+
+        #region //Camera 2//
+        public BitmapImage Image2
+        {
+            get { return _image2; }
+            set { Set(ref _image2, value); }
         }
 
-        public void Dispose()
+        public string IpCameraUrl2
         {
-            if (_videoSource != null && _videoSource.IsRunning)
+            get { return _ipCameraUrl2; }
+            set { Set(ref _ipCameraUrl2, value); }
+        }
+        
+        private void StartCamera2()
+        {
+            _videoSource2 = new MJPEGStream(IpCameraUrl2);
+            _videoSource2.NewFrame += video_NewFrame2;
+            _videoSource2.Start();
+        }
+
+        private void video_NewFrame2(object sender, NewFrameEventArgs eventArgs)
+        {
+            try
             {
-                _videoSource.Stop();
+                if (_recording)
+                {
+                    using (var bitmap = (Bitmap)eventArgs.Frame.Clone())
+                    {
+                        if (_firstFrameTime2 != null)
+                        {
+                            _writer2.WriteVideoFrame(bitmap, DateTime.Now - _firstFrameTime2.Value);
+                        }
+                        else
+                        {
+                            _writer2.WriteVideoFrame(bitmap);
+                            _firstFrameTime2 = DateTime.Now;
+                        }
+                    }
+                }
+                using (var bitmap = (Bitmap)eventArgs.Frame.Clone())
+                {
+                    var bi = bitmap.ToBitmapImage();
+                    bi.Freeze();
+                    Dispatcher.CurrentDispatcher.Invoke(() => Image2 = bi);
+                }
             }
-            _writer?.Dispose();
+            catch (Exception exc)
+            {
+                MessageBox.Show("Error on _videoSource_NewFrame:\n" + exc.Message, "Error", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                StopCamera2();
+            }
+        }
+
+        private void StopCamera2()
+        {
+            if (_videoSource2 != null && _videoSource2.IsRunning)
+            {
+                _videoSource2.Stop();
+                _videoSource2.NewFrame -= video_NewFrame2;
+            }
+            Image2 = null;
+        }
+
+        private void StopRecording2()
+        {
+            _writer2.Close();
+            _writer2.Dispose();
+        }
+
+        private void StartRecording2()
+        {
+            string timestamp = DateTime.Now.ToString();
+            timestamp = timestamp.Replace(':', '_');
+            string FileName = FolderPath + "\\2_" + timestamp + ".avi";
+            _firstFrameTime2 = null;
+            _writer2 = new VideoFileWriter();
+            _writer2.Open(FileName, (int)Math.Round(Image2.Width, 0), (int)Math.Round(Image2.Height, 0)); ;
+        }
+        #endregion
+
+        private void StartVideoSource()
+        {
+            StartCamera();
+            StartCamera2();
+        }
+
+        private void StopVideoSource()
+        {
+            StopCamera();
+            StopCamera2();
+        }
+
+        private void StartVideoRecording()
+        {
+            _recording = true;
+            StartRecording();
+            StartRecording2();
+        }
+
+        private void StopVideoRecording()
+        {
+            _recording = false;
+            StopRecording();
+            StopRecording2();
         }
     }
 }

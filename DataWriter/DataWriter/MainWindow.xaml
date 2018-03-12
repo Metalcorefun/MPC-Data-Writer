@@ -22,7 +22,7 @@
                     BorderBrush="Black"
                     BorderThickness="1" Margin="0,0,0,50
                     ">
-                        <Image Source="{Binding Image}" Margin="0,0,0,50" />
+                        <Image Source="{Binding Image}" Margin="0,0,0,0" />
                     </Border>
                     <Label
                          Margin="0,22,5,12"
@@ -35,6 +35,19 @@
             </TabItem>
             <TabItem Header="Камера 2">
                 <Grid Background="#FFE5E5E5">
+                    <Border Grid.Row="1"
+                    BorderBrush="Black"
+                    BorderThickness="1" Margin="0,0,0,50
+                    ">
+                        <Image Source="{Binding Image2}" Margin="0,0,0,0" />
+                    </Border>
+                    <Label
+                         Margin="0,22,5,12"
+                         VerticalAlignment="Bottom"
+                         Content="Ip camera" Grid.RowSpan="2" />
+                    <TextBox
+                     VerticalAlignment="Bottom"
+                     Text="{Binding IpCameraUrl2}" Margin="63,0,10,16" />
                 </Grid>
             </TabItem>
         </TabControl>
