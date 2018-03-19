@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataWriter"
         mc:Ignorable="d"
-        Title="MPC Data Writer" Height="708.737" Width="653.947">
+        Title="MPC Data Writer" Height="708.737" Width="653.947" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -36,6 +36,20 @@
             <TabItem Header="Камера 2">
                 <Grid Background="#FFE5E5E5">
                 </Grid>
+            </TabItem>
+            <TabItem Name="tiEquipment"  Header="Полиграф" IsEnabled="False">
+                <StackPanel Background="LightGray" Grid.Column="0" Height="568" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock>Список устройств:</TextBlock>
+                    <ComboBox SelectionChanged="cbDeviceList_SelectionChanged" x:Name="cbDeviceList"/>
+                    <TextBlock>Информация об устройстве:</TextBlock>
+                    <TextBlock x:Name="tbDianaInfo"></TextBlock>
+                    <Separator Height="4" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="Black" />
+                    <TextBlock x:Name="tbOptionalType"></TextBlock>
+                    <Button Content="Изменить тип Доп канала" Click="Optional_Button_Click" />
+                    <Separator Height="8" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="Black" />
+                    <TextBlock x:Name="tbTestMode"></TextBlock>
+                    <Button Content="Изменить тестовый режим" Click="TestMode_Button_Click" />
+                </StackPanel>
             </TabItem>
         </TabControl>
         <StackPanel

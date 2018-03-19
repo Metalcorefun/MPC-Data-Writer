@@ -43,8 +43,8 @@ namespace DataWriter
             StopSourceCommand = new RelayCommand(StopCamera);
             StartRecordingCommand = new RelayCommand(StartRecording);
             StopRecordingCommand = new RelayCommand(StopRecording);
-            IpCameraUrl = "http://88.53.197.250/axis-cgi/mjpg/video.cgi?resolution=320×240";
-            FolderPath = "D:\\TestDir";
+            IpCameraUrl = "http://192.168.0.101/axis-cgi/mjpg/video.cgi?fps=25";
+            FolderPath = "D:\\TestDir2";
         }
 
         #endregion
@@ -110,7 +110,9 @@ namespace DataWriter
                     {
                         if (_firstFrameTime != null)
                         {
-                            _writer.WriteVideoFrame(bitmap, DateTime.Now - _firstFrameTime.Value);
+                            try
+                            { _writer.WriteVideoFrame(bitmap, DateTime.Now - _firstFrameTime.Value); }
+                            catch(System.AccessViolationException) { }
                         }
                         else
                         {
@@ -128,9 +130,11 @@ namespace DataWriter
             }
             catch (Exception exc)
             {
+
                 MessageBox.Show("Error on _videoSource_NewFrame:\n" + exc.Message, "Error", MessageBoxButton.OK,
                     MessageBoxImage.Error);
-                StopCamera();
+                //StopCamera();
+
             }
         }
 
