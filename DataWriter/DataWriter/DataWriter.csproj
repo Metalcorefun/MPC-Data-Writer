@@ -109,6 +109,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BitmapHelpers.cs" />
+    <Compile Include="CameraModel.cs" />
     <Compile Include="CSVSender.cs" />
     <Compile Include="DianaDevLibDLL.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -117,7 +118,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

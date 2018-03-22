@@ -1,35 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.IO;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Win32;
 
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
-
-using KBCsv;
 
 using static DataWriter.DianaDevLibDLL;
+using static DataWriter.CameraModel;
 
 namespace DataWriter
 {
     public partial class MainWindow : Window
     {
+        #region Private fields
+        const uint S_OK = 0;
+        const uint E_ACCESSDENIED = 0x80070005;
+
+        private DataReceivedCallback OnDataReceived;
+        private ConnectionChangedCallback OnConnectionChanged;
+        private DianaInfoCallback OnDianaInfo;
+        //private DispChangedCallback OnDispChanged;
+        //private AmplChangedCallback OnAmplChanged;
+        private OptionalTypeChangedCallback OnOptionalTypeChanged;
+
         IntPtr pDiana = IntPtr.Zero;
 
         private CSVSender csvSender;
+
+        private FrameReceivedCallback OnFrameReceived;
+
+        private CameraModel cameraFace;
+        private CameraModel cameraBody;
+
+        NAudio.Wave.WaveIn sourceStream = null;
+        NAudio.Wave.DirectSoundOut waveOut = null;
+        NAudio.Wave.WaveFileWriter waveWriter = null;
+
+        #endregion
+
 
         public class ComboBoxDeviceItem
         {
@@ -52,7 +62,6 @@ namespace DataWriter
             Dispatcher.InvokeAsync(() => UpdateDeviceList());
         }
 
-
         void DianaInfoCallback(System.UInt32 dwUser, [MarshalAs(UnmanagedType.LPStr)] string lpstrDianaInfo)
         {
             Dispatcher.InvokeAsync(() => UpdateDianaInfo(lpstrDianaInfo));
@@ -69,21 +78,15 @@ namespace DataWriter
             Dispatcher.InvokeAsync(() => UpdateOptionalTypeGUI(bValue));
         }
 
-        private DataReceivedCallback OnDataReceived;
-        private ConnectionChangedCallback OnConnectionChanged;
-        private DianaInfoCallback OnDianaInfo;
-        //private DispChangedCallback OnDispChanged;
-        //private AmplChangedCallback OnAmplChanged;
-        private OptionalTypeChangedCallback OnOptionalTypeChanged;
-
         public MainWindow()
         {
             InitializeComponent();
-            this.Closing += (s, e) => (this.DataContext as IDisposable).Dispose();
+            this.CameraTextBox1.Text = "http://192.168.0.101/axis-cgi/mjpg/video.cgi?fps=25";
+            this.CameraTextBox2.Text = "http://192.168.0.102/axis-cgi/mjpg/video.cgi?fps=25";
+            //this.CameraTextBox1.Text = "http://212.162.177.75/axis-cgi/mjpg/video.cgi";
+            //this.CameraTextBox2.Text = "http://88.53.197.250/axis-cgi/mjpg/video.cgi";
+            //this.Closing += (s, e) => (this.DataContext as IDisposable).Dispose();
         }
-
-        const uint S_OK = 0;
-        const uint E_ACCESSDENIED = 0x80070005;
 
         private void Start_Diana()
         {
@@ -146,8 +149,9 @@ namespace DataWriter
 
         private void UpdateDeviceList()
         {
+            System.UInt32 count;
             cbDeviceList.Items.Clear();
-            if (!GetDevCount(pDiana, out System.UInt32 count))
+            if (!GetDevCount(pDiana, out count))
                 return;
             DeviceInfo[] pDevInfo = new DeviceInfo[count];
             if (!GetDevList(pDiana, pDevInfo, ref count))
@@ -210,10 +214,6 @@ namespace DataWriter
                 sourceList.Items.Add(item);
             }
         }
-
-        NAudio.Wave.WaveIn sourceStream = null;
-        NAudio.Wave.DirectSoundOut waveOut = null;
-        NAudio.Wave.WaveFileWriter waveWriter = null;
 
         private void StartAudioRecording(string path)
         {
@@ -280,12 +280,16 @@ namespace DataWriter
             csvSender = new CSVSender(tbPath.Text);
             Start_Diana();
             StartAudioRecording(tbPath.Text);
+            cameraFace.StartCameraRecording(tbPath.Text);
+            cameraBody.StartCameraRecording(tbPath.Text);
         }
 
         private void StopRecording(object sender, RoutedEventArgs e)
         {
             StopAudioRecording();
             Stop_Diana();
+            cameraFace.StopCameraRecording();
+            cameraBody.StopCameraRecording();
         }
 
         private void Optional_Button_Click(object sender, RoutedEventArgs e)
@@ -320,5 +324,54 @@ namespace DataWriter
             SetTestMode(pDiana, !GetTestMode(pDiana));
             UpdateTestModeGUI(GetTestMode(pDiana));
         }
+
+        #region Region camera
+        private void StartCamerasButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                OnFrameReceived = OnFrameRecievedCallBack;
+                CameraTextBox1.IsEnabled = false;
+                CameraTextBox2.IsEnabled = false;
+                cameraFace = new CameraModel(CameraTextBox1.Text, 1, OnFrameReceived);
+                cameraBody = new CameraModel(CameraTextBox2.Text, 2, OnFrameReceived);
+                cameraFace.StartCamera();
+                cameraBody.StartCamera();
+            }
+            catch
+            {
+                CameraTextBox1.IsEnabled = true;
+                cameraFace.StopCamera();
+                CameraTextBox2.IsEnabled = true;
+                cameraBody.StopCamera();
+            }
+
+        }
+        
+        private void OnFrameRecievedCallBack(BitmapImage Frame, int IndexCamera)
+        {
+            Dispatcher.InvokeAsync(() => UpdatePictureBox(Frame, IndexCamera));
+        }
+
+        public void UpdatePictureBox(BitmapImage Frame, int IndexCamera)
+        {
+            if (IndexCamera == 1)
+            {
+                CameraPictureBox1.Source = Frame;
+            }
+            else
+            {
+                CameraPictureBox2.Source = Frame;
+            }
+        }
+
+        private void StopCamerasButton_Click(object sender, RoutedEventArgs e)
+        {
+            cameraFace.StopCamera();
+            cameraBody.StopCamera();
+            CameraTextBox1.IsEnabled = true;
+            CameraTextBox2.IsEnabled = true;
+        }
+        #endregion
     }
 }

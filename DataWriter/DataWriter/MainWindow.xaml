@@ -5,40 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataWriter"
         mc:Ignorable="d"
-        Title="MPC Data Writer" Height="708.737" Width="653.947" WindowStartupLocation="CenterScreen">
-    <Window.DataContext>
-        <local:MainWindowViewModel/>
-    </Window.DataContext>
-
-    <Grid Background="WhiteSmoke">
-        <GroupBox Header="Путь" Margin="10,558,10,0" Height="62" VerticalAlignment="Top">
-            <TextBox Name="tbPath" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="565" Text="{Binding FolderPath}"/>
-        </GroupBox>
-        <Button Content="..." HorizontalAlignment="Left" Margin="598,584,0,0" VerticalAlignment="Top" Width="23" Height="23" Click="ShowDirectory" />
-        <TabControl Margin="10,10,10,0" Height="423" VerticalAlignment="Top">
+        Title="MPC Data Writer" Height="532" Width="1000" WindowStartupLocation="CenterScreen">
+    <Grid Background="WhiteSmoke" Margin="10,0,0,2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="325*"/>
+            <ColumnDefinition Width="657*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl Margin="0,10,10,0" Height="479" VerticalAlignment="Top" Grid.Column="1">
             <TabItem Header="Камера 1">
                 <Grid Background="#FFE5E5E5">
                     <Border Grid.Row="1"
                     BorderBrush="Black"
                     BorderThickness="1" Margin="0,0,0,50
                     ">
-                        <Image Source="{Binding Image}" Margin="0,0,0,50" />
+                        <Image Name="CameraPictureBox1" Margin="0,0,0,0" />
                     </Border>
                     <Label
                          Margin="0,22,5,12"
                          VerticalAlignment="Bottom"
-                         Content="Ip camera" Grid.RowSpan="2" />
+                         Content="Camera URL:" Grid.RowSpan="2" />
                     <TextBox
                      VerticalAlignment="Bottom"
-                     Text="{Binding IpCameraUrl}" Margin="63,0,10,16" />
+                     Name="CameraTextBox1"
+                     Text="" Margin="80,0,10,16" />
                 </Grid>
             </TabItem>
             <TabItem Header="Камера 2">
-                <Grid Background="#FFE5E5E5">
+                <Grid Background="#FFE5E5E5" Margin="0,5,0,1">
+                    <Border Grid.Row="1"
+                    BorderBrush="Black"
+                    BorderThickness="1" Margin="0,0,0,50
+                    ">
+                        <Image Name="CameraPictureBox2" Margin="0,0,0,0" />
+                    </Border>
+                    <Label
+                         Margin="0,22,5,12"
+                         VerticalAlignment="Bottom"
+                         Content="Camera URL:" Grid.RowSpan="2" />
+                    <TextBox
+                     VerticalAlignment="Bottom"
+                     Name="CameraTextBox2"
+                     Text="" Margin="80,0,10,16" />
                 </Grid>
             </TabItem>
             <TabItem Name="tiEquipment"  Header="Полиграф" IsEnabled="False">
-                <StackPanel Background="LightGray" Grid.Column="0" Height="568" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                <StackPanel Background="LightGray" Grid.Column="0" Height="395" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <TextBlock>Список устройств:</TextBlock>
                     <ComboBox SelectionChanged="cbDeviceList_SelectionChanged" x:Name="cbDeviceList"/>
                     <TextBlock>Информация об устройстве:</TextBlock>
@@ -52,44 +63,77 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <StackPanel
-                        HorizontalAlignment="Right"
-                        Orientation="Horizontal" Margin="0,623,103,0" RenderTransformOrigin="1.568,-1.075" Height="40" VerticalAlignment="Top">
-            <Button Grid.Column="0"
-                        Width="100"
-                        Height="30"
-                        Margin="5"
-                        HorizontalAlignment="Right"
-                        Command="{Binding StartSourceCommand}"
-                        Content="Start video" />
-            <Button Grid.Column="1"
-                        Width="100"
-                        Height="30"
-                        Margin="5"
-                        HorizontalAlignment="Left"
-                        Command="{Binding StopSourceCommand}"
-                        Content="Stop video" />
-            <Button Grid.Column="1"
-                    Width="100"
+        <GroupBox x:Name="RecordingGroupBox" Header="Запись" Margin="2,10,10,0" Height="100" VerticalAlignment="Top">
+            <StackPanel Orientation="Horizontal">
+                <Grid Width="297">
+                    <Label Grid.Row="0" Content="Путь" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,0"></Label>
+                    <TextBox 
+                        Grid.Row="0" x:Name="tbPath" Height="23" 
+                        TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"
+                        Width="230"
+                        Margin="0,5,0,0"/>
+                    <Button Grid.Row="0"
+                            Margin="0,5,0,0"
+                            Content="..." HorizontalAlignment="Right" VerticalAlignment="Top" Width="23" Height="23" Click="ShowDirectory" />
+                    <Button Grid.Row="1"
+                            Width="100"
+                            Height="30"
+                            HorizontalAlignment="Right"
+                            Margin="0,20,40,0"
+                            Content="Остановить" Click="StopRecording"/>
+                    <Button Grid.Row="1"
+                            Width="100"
+                            Height="30"
+                            HorizontalAlignment="Left"
+                            Margin="40,20,0,0"
+                            Content="Запустить" Click="StartRecording"/>
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox x:Name="CameraGroupBox" Header="Управление камерами" HorizontalAlignment="Left" Margin="2,120,0,0" VerticalAlignment="Top" Height="65" Width="313">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                <Button Grid.Column="0"
+                        x:Name="StartCamerasButton"
+                    Width="90"
+                    Height="30"
+                    HorizontalAlignment="Right"
+                    Margin="5"
+                    Content="Запустить" Click="StartCamerasButton_Click"/>
+                <Button x:Name="StopCamerasButton"
+                    Grid.Column="1"
+                    Width="90"
                     Height="30"
                     Margin="5"
-                    HorizontalAlignment="Right"
-                    Command="{Binding StartRecordingCommand}"
-                    Content="Start rec" Click="StartRecording" />
-            <Button Grid.Column="2"
-                    Width="100"
-                    Margin="5"
                     HorizontalAlignment="Left"
-                    Command="{Binding StopRecordingCommand}"
-                    Content="Stop rec" Click="StopRecording" />
-        </StackPanel>
-        <ListView Name="sourceList"  Margin="10,438,10,0" Height="91" VerticalAlignment="Top">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="500"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Content="Обновить список аудиоустройств" HorizontalAlignment="Center" Margin="0,539,0,0" VerticalAlignment="Top" Width="258" Click="RefreshAudioDevices"/>
+                    Content="Остановить" Click="StopCamerasButton_Click"/>
+                <Button Width="90"
+                        Height="30"
+                        HorizontalAlignment="Right"
+                        Margin="5"
+                        Content="Настройка"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox x:Name="AudioGroupBox" Header="Управление звуком" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top" Height="163" Width="313">
+            <StackPanel Margin="0,0,0,-2">
+                <ListView Name="sourceList" Height="91" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+                    <ListView.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleY="0.353"/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="1.994"/>
+                        </TransformGroup>
+                    </ListView.RenderTransform>
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="500"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <ComboBox x:Name="comboBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+                <Button Content ="Обновить список аудиоустройств" VerticalAlignment="Top" Width="258" Click="RefreshAudioDevices" Height="20"/>
+            </StackPanel>
+        </GroupBox>
+
     </Grid>
 </Window>
