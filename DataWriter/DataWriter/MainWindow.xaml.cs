@@ -9,6 +9,7 @@ using System.Runtime.InteropServices;
 
 using static DataWriter.DianaDevLibDLL;
 using static DataWriter.CameraModel;
+using System.Windows.Threading;
 
 namespace DataWriter
 {
@@ -18,9 +19,13 @@ namespace DataWriter
         const uint S_OK = 0;
         const uint E_ACCESSDENIED = 0x80070005;
 
+        DateTime StartRecDateTime;
+        DispatcherTimer dispatcherTimer;
+
         private DataReceivedCallback OnDataReceived;
         private ConnectionChangedCallback OnConnectionChanged;
         private DianaInfoCallback OnDianaInfo;
+
         //private DispChangedCallback OnDispChanged;
         //private AmplChangedCallback OnAmplChanged;
         private OptionalTypeChangedCallback OnOptionalTypeChanged;
@@ -95,15 +100,11 @@ namespace DataWriter
             switch (Init())
             {
                 case S_OK:
-
                     break;
                 case E_ACCESSDENIED:
-                    System.Windows.MessageBox.Show("Отсутствуют права на использование: нужен USB-ключ", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-
-                    return;
+                    throw new Exception("Отсутствуют права на использование: нужен USB-ключ");
                 default:
-                    System.Windows.MessageBox.Show("Непредвиденная ошибка", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                    throw new Exception("Непредвиденная ошибка");
             }
             CreateDiana(out pDiana);
             if (pDiana == IntPtr.Zero)
@@ -205,21 +206,25 @@ namespace DataWriter
                 sources.Add(NAudio.Wave.WaveIn.GetCapabilities(i));
             }
 
-            sourceList.Items.Clear();
+            AudioComboBox.Items.Clear();
 
             foreach (var source in sources)
             {
                 System.Windows.Controls.ListViewItem item = new System.Windows.Controls.ListViewItem();
                 item.Content = source.ProductName;
-                sourceList.Items.Add(item);
+                AudioComboBox.Items.Add(item);
+            }
+            if (AudioComboBox.Items != null)
+            {
+                AudioComboBox.SelectedIndex = 0;
             }
         }
 
         private void StartAudioRecording(string path)
         {
-            if (sourceList.SelectedItems.Count == 0) return;
+            if (AudioComboBox.SelectedItem == null) return;
 
-            int deviceNumber = sourceList.Items.IndexOf(sourceList.SelectedItems[0]);
+            int deviceNumber = AudioComboBox.Items.IndexOf(AudioComboBox.SelectedItem);
 
             string timestamp = DateTime.Now.ToString();
             timestamp = timestamp.Replace(':', '.');
@@ -277,19 +282,54 @@ namespace DataWriter
 
         private void StartRecording(object sender, RoutedEventArgs e)
         {
-            csvSender = new CSVSender(tbPath.Text);
-            Start_Diana();
-            StartAudioRecording(tbPath.Text);
-            cameraFace.StartCameraRecording(tbPath.Text);
-            cameraBody.StartCameraRecording(tbPath.Text);
+            try
+            {
+                StartRecDateTime = DateTime.Now;
+                dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                dispatcherTimer.Tick += dispatcherTimer_Tick;
+                dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+                dispatcherTimer.Start();
+
+                csvSender = new CSVSender(tbPath.Text);
+                Start_Diana();
+                StartAudioRecording(tbPath.Text);
+                cameraFace.StartCameraRecording(tbPath.Text);
+                cameraBody.StartCameraRecording(tbPath.Text);
+
+                RecStatusTextBlock.Text = "Запись";
+            }
+            catch (Exception exc)
+            {
+                System.Windows.MessageBox.Show(exc.Message, "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            }
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            DateTime Now = DateTime.Now;
+            TimerTextBlock.Text = (Now.Subtract(StartRecDateTime).ToString());
         }
 
         private void StopRecording(object sender, RoutedEventArgs e)
         {
-            StopAudioRecording();
-            Stop_Diana();
-            cameraFace.StopCameraRecording();
-            cameraBody.StopCameraRecording();
+            try
+            {
+                if (dispatcherTimer != null)
+                {
+                    dispatcherTimer.Stop();
+                }
+                StopAudioRecording();
+                Stop_Diana();
+                cameraFace.StopCameraRecording();
+                cameraBody.StopCameraRecording();
+                RecStatusTextBlock.Text = "Остановлена";
+            }
+            catch (Exception exc)
+            {
+                System.Windows.MessageBox.Show("Error on Stop Recording:\n" + exc.Message, "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            }
         }
 
         private void Optional_Button_Click(object sender, RoutedEventArgs e)

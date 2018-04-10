@@ -71,9 +71,10 @@ namespace DataWriter
             }
             catch (Exception exc)
             {
-                System.Windows.MessageBox.Show("Error on _videoSource_NewFrame:\n" + exc.Message, "Error", MessageBoxButton.OK,
-                    MessageBoxImage.Error);
                 StopCamera();
+                System.Windows.MessageBox.Show(exc.Message, "Error", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+                throw exc;
             }
         }
 

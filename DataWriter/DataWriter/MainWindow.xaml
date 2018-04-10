@@ -31,7 +31,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Камера 2">
-                <Grid Background="#FFE5E5E5" Margin="0,5,0,1">
+                <Grid Background="#FFE5E5E5">
                     <Border Grid.Row="1"
                     BorderBrush="Black"
                     BorderThickness="1" Margin="0,0,0,50
@@ -63,34 +63,38 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
-        <GroupBox x:Name="RecordingGroupBox" Header="Запись" Margin="2,10,10,0" Height="100" VerticalAlignment="Top">
+        <GroupBox x:Name="RecordingGroupBox" Header="Запись" Margin="2,10,10,0" Height="193" VerticalAlignment="Top">
             <StackPanel Orientation="Horizontal">
                 <Grid Width="297">
-                    <Label Grid.Row="0" Content="Путь" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,0"></Label>
-                    <TextBox 
-                        Grid.Row="0" x:Name="tbPath" Height="23" 
-                        TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"
-                        Width="230"
-                        Margin="0,5,0,0"/>
-                    <Button Grid.Row="0"
-                            Margin="0,5,0,0"
-                            Content="..." HorizontalAlignment="Right" VerticalAlignment="Top" Width="23" Height="23" Click="ShowDirectory" />
-                    <Button Grid.Row="1"
+                    <Label Content="Состояние:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,0"></Label>
+                    <TextBlock x:Name="RecStatusTextBlock" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="70,10,0,0">Остановлена</TextBlock>
+                    <Label Content="Время записи:" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,29,0,0"></Label>
+
+                    <TextBlock x:Name="TimerTextBlock" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90,34,0,0">00:00:00</TextBlock>
+                    <Label Content="Путь" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,71,0,74" Height="26"/>
+                    <TextBox x:Name="tbPath" Height="23" 
+                        TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Width="220"></TextBox>
+                    <Button
+                            Content="..." HorizontalAlignment="Right" VerticalAlignment="Center" Width="23" Height="23" Click="ShowDirectory" />
+                    <Button
                             Width="100"
                             Height="30"
                             HorizontalAlignment="Right"
-                            Margin="0,20,40,0"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,40,37"
                             Content="Остановить" Click="StopRecording"/>
-                    <Button Grid.Row="1"
+                    <Button
                             Width="100"
                             Height="30"
                             HorizontalAlignment="Left"
-                            Margin="40,20,0,0"
+                            VerticalAlignment="Bottom"
+                            Margin="40,0,0,37"
                             Content="Запустить" Click="StartRecording"/>
                 </Grid>
             </StackPanel>
         </GroupBox>
-        <GroupBox x:Name="CameraGroupBox" Header="Управление камерами" HorizontalAlignment="Left" Margin="2,120,0,0" VerticalAlignment="Top" Height="65" Width="313">
+        <GroupBox x:Name="CameraGroupBox" Header="Управление камерами" HorizontalAlignment="Left" Margin="2,208,0,0" VerticalAlignment="Top" Height="65" Width="313">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                 <Button Grid.Column="0"
                         x:Name="StartCamerasButton"
@@ -113,24 +117,9 @@
                         Content="Настройка"/>
             </StackPanel>
         </GroupBox>
-        <GroupBox x:Name="AudioGroupBox" Header="Управление звуком" HorizontalAlignment="Left" Margin="0,190,0,0" VerticalAlignment="Top" Height="163" Width="313">
-            <StackPanel Margin="0,0,0,-2">
-                <ListView Name="sourceList" Height="91" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
-                    <ListView.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform AngleY="0.353"/>
-                            <RotateTransform/>
-                            <TranslateTransform Y="1.994"/>
-                        </TransformGroup>
-                    </ListView.RenderTransform>
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Width="500"/>
-                        </GridView>
-                    </ListView.View>
-                </ListView>
-                <ComboBox x:Name="comboBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120"/>
+        <GroupBox x:Name="AudioGroupBox" Header="Управление звуком" HorizontalAlignment="Left" Margin="0,272,0,0" VerticalAlignment="Top" Height="93" Width="313">
+            <StackPanel Margin="0,0,0,3">
+                <ComboBox x:Name="AudioComboBox" Grid.Column="1" Margin ="0,10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="301"/>
                 <Button Content ="Обновить список аудиоустройств" VerticalAlignment="Top" Width="258" Click="RefreshAudioDevices" Height="20"/>
             </StackPanel>
         </GroupBox>
