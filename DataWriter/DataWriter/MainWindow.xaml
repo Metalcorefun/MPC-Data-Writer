@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:DataWriter"
         mc:Ignorable="d"
         Title="MPC Data Writer" Height="532" Width="1000" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <local:MainWindowController/>
+    </Window.DataContext>
     <Grid Background="WhiteSmoke" Margin="10,0,0,2">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="325*"/>
@@ -18,7 +21,10 @@
                     BorderBrush="Black"
                     BorderThickness="1" Margin="0,0,0,50
                     ">
-                        <Image Name="CameraPictureBox1" Margin="0,0,0,0" />
+                        <Image 
+                            Name="CameraPictureBox1" 
+                            Margin="0,0,0,0" 
+                            Source="{Binding Image_1}"/>
                     </Border>
                     <Label
                          Margin="0,22,5,12"
@@ -27,7 +33,7 @@
                     <TextBox
                      VerticalAlignment="Bottom"
                      Name="CameraTextBox1"
-                     Text="" Margin="80,0,10,16" />
+                     Text="{Binding CameraUrl1}" Margin="80,0,10,16" />
                 </Grid>
             </TabItem>
             <TabItem Header="Камера 2">
@@ -36,7 +42,10 @@
                     BorderBrush="Black"
                     BorderThickness="1" Margin="0,0,0,50
                     ">
-                        <Image Name="CameraPictureBox2" Margin="0,0,0,0" />
+                        <Image 
+                            Name="CameraPictureBox2" 
+                            Margin="0,0,0,0" 
+                            Source="{Binding Image_2}"/>
                     </Border>
                     <Label
                          Margin="0,22,5,12"
@@ -45,21 +54,25 @@
                     <TextBox
                      VerticalAlignment="Bottom"
                      Name="CameraTextBox2"
-                     Text="" Margin="80,0,10,16" />
+                     Text="{Binding CameraUrl2}" Margin="80,0,10,16" />
                 </Grid>
             </TabItem>
-            <TabItem Name="tiEquipment"  Header="Полиграф" IsEnabled="False">
+            <TabItem Name="tiEquipment"  Header="Полиграф">
                 <StackPanel Background="LightGray" Grid.Column="0" Height="395" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
                     <TextBlock>Список устройств:</TextBlock>
-                    <ComboBox SelectionChanged="cbDeviceList_SelectionChanged" x:Name="cbDeviceList"/>
+                    <ComboBox x:Name="cbDeviceList"/>
                     <TextBlock>Информация об устройстве:</TextBlock>
                     <TextBlock x:Name="tbDianaInfo"></TextBlock>
                     <Separator Height="4" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="Black" />
                     <TextBlock x:Name="tbOptionalType"></TextBlock>
-                    <Button Content="Изменить тип Доп канала" Click="Optional_Button_Click" />
+                    <Button 
+                        Content="Изменить тип Доп канала" 
+                        Command="{Binding OptionalButtonCommand}" />
                     <Separator Height="8" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="Black" />
                     <TextBlock x:Name="tbTestMode"></TextBlock>
-                    <Button Content="Изменить тестовый режим" Click="TestMode_Button_Click" />
+                    <Button 
+                        Content="Изменить тестовый режим"
+                        Command="{Binding TestModeButtonCommand}"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
@@ -74,23 +87,30 @@
                     <Label Content="Путь" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0,71,0,74" Height="26"/>
                     <TextBox x:Name="tbPath" Height="23" 
                         TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center"
-                        Width="220"></TextBox>
+                        Width="220" Text="{Binding Path}"/>
                     <Button
-                            Content="..." HorizontalAlignment="Right" VerticalAlignment="Center" Width="23" Height="23" Click="ShowDirectory" />
+                            Content="..." 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center" 
+                            Width="23" 
+                            Height="23" 
+                            Command="{Binding SelectPathCommand}" />
                     <Button
                             Width="100"
                             Height="30"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             Margin="0,0,40,37"
-                            Content="Остановить" Click="StopRecording"/>
+                            Content="Остановить" 
+                            Command="{Binding StopRecordingCommand}"/>
                     <Button
                             Width="100"
                             Height="30"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
                             Margin="40,0,0,37"
-                            Content="Запустить" Click="StartRecording"/>
+                            Content="Запустить"
+                            Command="{Binding StartRecordingCommand}"/>
                 </Grid>
             </StackPanel>
         </GroupBox>
@@ -98,18 +118,20 @@
             <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
                 <Button Grid.Column="0"
                         x:Name="StartCamerasButton"
-                    Width="90"
-                    Height="30"
-                    HorizontalAlignment="Right"
-                    Margin="5"
-                    Content="Запустить" Click="StartCamerasButton_Click"/>
+                        Width="90"
+                        Height="30"
+                        HorizontalAlignment="Right"
+                        Margin="5"
+                        Content="Запустить" 
+                        Command="{Binding StartSourceCommand}"/>
                 <Button x:Name="StopCamerasButton"
-                    Grid.Column="1"
-                    Width="90"
-                    Height="30"
-                    Margin="5"
-                    HorizontalAlignment="Left"
-                    Content="Остановить" Click="StopCamerasButton_Click"/>
+                        Grid.Column="1"
+                        Width="90"
+                        Height="30"
+                        Margin="5"
+                        HorizontalAlignment="Left"
+                        Content="Остановить" 
+                        Command="{Binding StopSourceCommand}"/>
                 <Button Width="90"
                         Height="30"
                         HorizontalAlignment="Right"
@@ -119,8 +141,18 @@
         </GroupBox>
         <GroupBox x:Name="AudioGroupBox" Header="Управление звуком" HorizontalAlignment="Left" Margin="0,272,0,0" VerticalAlignment="Top" Height="93" Width="313">
             <StackPanel Margin="0,0,0,3">
-                <ComboBox x:Name="AudioComboBox" Grid.Column="1" Margin ="0,10" HorizontalAlignment="Left" VerticalAlignment="Top" Width="301"/>
-                <Button Content ="Обновить список аудиоустройств" VerticalAlignment="Top" Width="258" Click="RefreshAudioDevices" Height="20"/>
+                <ComboBox x:Name="AudioComboBox"
+                          Grid.Column="1"
+                          Margin ="0,10"
+                          HorizontalAlignment="Left" 
+                          VerticalAlignment="Top" 
+                          Width="301"
+                          ItemsSource="{Binding AudioList}"/>
+                <Button Content ="Обновить список аудиоустройств" 
+                        VerticalAlignment="Top" 
+                        Width="258" 
+                        Command="{Binding RefreshAudioDeviceCommand}"
+                        Height="20"/>
             </StackPanel>
         </GroupBox>
 

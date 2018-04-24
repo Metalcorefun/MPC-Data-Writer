@@ -157,10 +157,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AudioModel.cs" />
     <Compile Include="BitmapHelpers.cs" />
     <Compile Include="CameraModel.cs" />
+    <Compile Include="MainWindowController.cs" />
     <Compile Include="CSVSender.cs" />
     <Compile Include="DianaDevLibDLL.cs" />
+    <Compile Include="DianaModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -5,44 +5,51 @@ using System.Windows.Media.Imaging;
 using Accord.Video.FFMPEG;
 using AForge.Video;
 using Microsoft.Win32;
+using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace DataWriter
 {
-    public class CameraModel: IDisposable
+    public class CameraModel: INotifyPropertyChanged, IDisposable
     {
         #region Private fields
-        private string _cameraUrl;
+        private BitmapImage _image;
+        private string _camera_url;
         private int _index;
         private bool _recording;
 
         private IVideoSource _videoSource;
 
-        private BitmapImage _image;
         private VideoFileWriter _writer;
         private DateTime? _firstFrameTime;
-        private FrameReceivedCallback SetReceivedFrame;
         #endregion
 
         #region Properties
-
-        public CameraModel(string CameraURL, int IndexCamera, FrameReceivedCallback OnFrameReceived)
+        public CameraModel(string camera_url, int index)
         {
-            this._cameraUrl = CameraURL;
-            this._index = IndexCamera;
-            this.SetReceivedFrame = OnFrameReceived;
+            this._camera_url = camera_url;
+            this._index = index;
         }
 
-        public delegate void FrameReceivedCallback(BitmapImage Frame, int IndexCamera);
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        public BitmapImage Image
+        {
+            get { return _image; }
+            set
+            {
+                _image = value;
+                RaisePropertyChanged("Image");
+            }
+        }
+
+        private void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion
-
-        public void StartCamera()
-        {
-            _videoSource = new MJPEGStream(_cameraUrl);
-            _videoSource.NewFrame += video_NewFrame;
-            _videoSource.Start();
-        }
-
         private void video_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
             try
@@ -64,20 +71,25 @@ namespace DataWriter
                 }
                 using (var bitmap = (Bitmap)eventArgs.Frame.Clone())
                 {
-                    _image = bitmap.ToBitmapImage();
-                    _image.Freeze();
-                    SetReceivedFrame(_image, _index);
+                    var bi = bitmap.ToBitmapImage();
+                    bi.Freeze();
+                    Dispatcher.CurrentDispatcher.Invoke(() => Image = bi);
                 }
             }
             catch (Exception exc)
             {
-                StopCamera();
+                //StopCamera();
                 System.Windows.MessageBox.Show(exc.Message, "Error", MessageBoxButton.OK,
                 MessageBoxImage.Error);
                 throw exc;
             }
         }
-
+        public void StartCamera()
+        {
+            _videoSource = new MJPEGStream(_camera_url);
+            _videoSource.NewFrame += video_NewFrame;
+            _videoSource.Start();
+        }
         public void StopCamera()
         {
             if (_videoSource != null && _videoSource.IsRunning)
@@ -85,7 +97,7 @@ namespace DataWriter
                 _videoSource.Stop();
                 _videoSource.NewFrame -= video_NewFrame;
             }
-            SetReceivedFrame(null, _index);
+            Dispatcher.CurrentDispatcher.Invoke(() => Image = null);
         }
 
         public void StartCameraRecording(string FolderPath)

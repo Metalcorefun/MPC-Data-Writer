@@ -1,4 +1,10 @@
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\bin\x86\Debug\DataWriter.exe.config
+C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\MainWindow.g.cs
+C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\App.g.cs
+C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter_Content.g.cs
+C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter_MarkupCompile.cache
+C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter_MarkupCompile.lref
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\bin\x86\Debug\avcodec-57.dll
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\bin\x86\Debug\avdevice-57.dll
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\bin\x86\Debug\avfilter-6.dll
@@ -38,14 +44,10 @@ C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\bin\x86\De
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\bin\x86\Debug\GalaSoft.MvvmLight.Platform.pdb
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\bin\x86\Debug\GalaSoft.MvvmLight.Platform.xml
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\bin\x86\Debug\KBCsv.xml
-C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\MainWindow.g.cs
-C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\App.g.cs
-C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter_Content.g.cs
-C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter_MarkupCompile.cache
-C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter_MarkupCompile.lref
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\MainWindow.baml
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter.g.resources
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter.Properties.Resources.resources
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter.csproj.GenerateResource.Cache
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter.exe
 C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter.pdb
+C:\Users\pingv\Documents\GitHub\MPC-Data-Writer\DataWriter\DataWriter\obj\x86\Debug\DataWriter.csprojResolveAssemblyReference.cache
